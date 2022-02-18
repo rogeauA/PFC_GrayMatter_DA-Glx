@@ -1,0 +1,61 @@
+% Relationship between whole striatal dopamine release and gray matter volume
+% open MATLAB
+
+spm pet
+
+% Select Basic Model -> Factorial design specification
+% Directory -> "~/PHNO/analyses/whole_release"
+% Design -> "Multiple Regression"
+% Scans -> '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-503_ses-B_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-506_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-507_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-508_ses-B_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-510_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-511_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-512_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-513_ses-B_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-514_ses-B_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-515_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-516_ses-B_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-517_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-518_ses-B_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-519_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-520_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-521_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-523_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-524_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-525_ses-B_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-526_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-529_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-531_ses-A_T1w.nii'
+    '~/Downloads/PFC_GrayMatter_DA-Glx/data/preprocessed_gray_matter_maps/smwc1sub-533_ses-A_T1w.nii'
+
+% Covariate -> compute and add ("plac_striatum" - "amph_striatum")/"plac_striatum" for concerned subjects from data.csv for main analyses
+% add "Age" "Tab" "Can" columns as well from data.csv for analyses with covariates
+% Name -> striatum_release
+% No centering
+% Include Intercept
+% Covariates and Multiple Covariates -> leave empty
+% Masking -> absolute threshold masking; Threshold = 0.1
+% Implicit Mask -> Yes
+% Explicit Mask -> '~/Downloads/PFC_GrayMatter_DA-Glx/data/masks/mask_BA9+46.nii'
+% For exploratory analysis on the whole brain: leave Explicit Mask empty and Threshold at 0.2
+% Global Calculation -> User
+% Global Values -> copy and paste corresponding values from "ICV" column from data.csv
+% Global normalisation -> Overall grand mean scaling -> No
+% Normalisation -> Proportional
+
+% SPM tab -> Model estimation
+% Select SPM.mat -> dependency -> Factorial design specification: SPM.mat File
+% Write residuals -> No
+% Method classical
+
+% Results
+% select SPM.mat file 
+% t-contrasts -> define new contrast -> name "whole striatal dopamine release"
+% type: t-contrast
+% contrast: 0 -1
+% apply masking: None - p adjustment to control: None - threshold: 0.001
+% Results can be viewed
+
+% Repeat using "plac_SM_striatum"/"amph_SM_striatum", "plac_ASSO_striatum"/"amph_ASSO_striatum" and "plac_LIM_striatum"/"amph_LIM_striatum" columns from data.csv
